@@ -38,6 +38,15 @@ sudo systemctl enable ssh
 sudo systemctl start ssh
 ```
 
+find your server ip:
+```bash
+ip route
+```
+
+you can now ssh into the server from other devices on the same network with the command:
+```bash
+ssh <username>@<server_ip>
+```
 
 ### Passwordless login
 1. Find you client ssh public key in your `$HOME/.ssh` folder. 
@@ -66,6 +75,24 @@ You should now be able ssh into the server from this client without a password
 
 
 ### Port forwarding
+**NB port forwarding is a possible security risk**, as you enable a new attack vector over the internet. Make sure your ssh-server has a strong password. 
+
+By enabeling port forwarding in your router it is now possible to connect to the server from outside your local network. 
+
+1. find your public network address. You can find it on google: https://www.google.com/search?q=what+is+my+ip&oq=what+is+my+ip
+
+2. find your ssh servers local address. This can be found by running this command on the server:
+```bash
+ip route | grep -oP '(?<=dhcp src )[^ ]*'
+```
+
+3. enable port forwarding in your wifi settings. How to do this depends on your isp, but i found it by opening `192.168.0.1` in the browser
+  - create a ssh port forwarding rule on port 22 with the server ip as the internal host.
+
+4. You should now be able to connect to the ssh-server from outside the network by using the address
+```bash
+ssh <username>@<public ip address>
+```
 
 ## Git
 The .bashrc file is a part of the repository, but its not located inside the `magnum_server` folder structure. In order to do this i link the file inside the folder structure.
