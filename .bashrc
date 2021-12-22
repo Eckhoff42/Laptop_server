@@ -120,6 +120,7 @@ fi
 cbonsai -S -t 0.005 -m "Magnum Server up and running"
 
 # Alias
-alias power='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep "time to\|percentage"'
+alias battery='~/magnum_server/scripts/battery.sh'
+alias power='~/magnum_server/scripts/battery.sh'
 alias monitor='~/magnum_server/scripts/monitor.sh'
 

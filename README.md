@@ -94,6 +94,34 @@ ip route | grep -oP '(?<=dhcp src )[^ ]*'
 ssh <username>@<public ip address>
 ```
 
+### Limit amount of login-attempts
+inspired by this thread *https://serverfault.com/questions/275669/ssh-sshd-how-do-i-set-max-login-attempts*
+
+
+Set the max number of login-attempt to 1 for each connection
+In `/etc/ssh/sshd_config` add the line
+```bash
+MaxAuthTries 1
+```
+
+Add rules to the firewall in order to drop request from the same IP-address if there is more than 3 connection-attempts in 2 minutes.
+Create a new chain
+```bash
+sudo iptables -N SSHATTACK
+sudo iptables -A SSHATTACK -j LOG --log-prefix "Possible SSH attack! " --log-level 7
+sudo iptables -A SSHATTACK -j DROP
+```
+addd rules
+```bash
+iptables -A INPUT -i eth0 -p tcp -m state --dport 22 --state NEW -m recent --set
+iptables -A INPUT -i eth0 -p tcp -m state --dport 22 --state NEW -m recent --update --seconds 120 --hitcount 4 -j SSHATTACK
+```
+See log of blocked attacks here in `/var/log/syslog`:
+```bash
+Dec 27 18:01:58 ubuntu kernel: [  510.007570] Possible SSH attack! IN=eth0 OUT= MAC=01:2c:18:47:43:2d:10:c0:31:4d:11:ac:f8:01 SRC=192.168.203.129 DST=192.168.203.128 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=30948 DF PROTO=TCP SPT=53272 DPT=1785 WINDOW=14600 RES=0x00 SYN URGP=0
+```
+
+
 ## Git
 The .bashrc file is a part of the repository, but its not located inside the `magnum_server` folder structure. In order to do this i link the file inside the folder structure.
 ```bash
@@ -104,6 +132,22 @@ The .bashrc file can now be added to git normally.
 ## Scripts
 
 ### Monitoring
+A script to monitor events on the ssh-server. Used to detect unwanted logins or login-attempts. Uses persitant storage in order to se changes from last time the monitor script was ran
+
+```bash
+monitor [-h] [-m] [-f] [-c]
+-h: Help 
+-m: More info 
+-f: Failed login 
+-c: Custom <search query>
+```
+
+### See laptop battery
+```bash
+battery
+#alternatively
+power
+```
 
 ## Local network file server
 
