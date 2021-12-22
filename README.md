@@ -113,14 +113,22 @@ sudo iptables -A SSHATTACK -j DROP
 ```
 addd rules
 ```bash
-iptables -A INPUT -i eth0 -p tcp -m state --dport 22 --state NEW -m recent --set
-iptables -A INPUT -i eth0 -p tcp -m state --dport 22 --state NEW -m recent --update --seconds 120 --hitcount 4 -j SSHATTACK
+sudo iptables -A INPUT -i eth0 -p tcp -m state --dport 22 --state NEW -m recent --set
+sudo iptables -A INPUT -i eth0 -p tcp -m state --dport 22 --state NEW -m recent --update --seconds 120 --hitcount 4 -j SSHATTACK
 ```
 See log of blocked attacks here in `/var/log/syslog`:
 ```bash
 Dec 27 18:01:58 ubuntu kernel: [  510.007570] Possible SSH attack! IN=eth0 OUT= MAC=01:2c:18:47:43:2d:10:c0:31:4d:11:ac:f8:01 SRC=192.168.203.129 DST=192.168.203.128 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=30948 DF PROTO=TCP SPT=53272 DPT=1785 WINDOW=14600 RES=0x00 SYN URGP=0
 ```
 
+### Disable pasword login. Only allow public/private ssh key
+In order to avoid password brute force attacks one posibility is only allowing rsa keys. 
+
+This can be done by changing the `/etc/ssh/sshd_config` file
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+change `/PermitRootLogin yes` to `PermitRootLogin no`' and `PasswordAuthentication yes` to PasswordAuthentication no
 
 ## Git
 The .bashrc file is a part of the repository, but its not located inside the `magnum_server` folder structure. In order to do this i link the file inside the folder structure.
