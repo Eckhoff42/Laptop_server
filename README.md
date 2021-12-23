@@ -1,4 +1,4 @@
-# magnum_server
+# Personal server
 A simple server running Ubuntu server 20.04.3 on my old laptop. I will be documenting the steps i took to get the server up and running as well ass sharing the scripts - files etc i created along the way.
 
 ## Setup and initial tweaking
@@ -158,5 +158,23 @@ power
 ```
 
 ## Local network file server
+SSFS can be used to connect the server filesystem to the client machine. 
+
+On the client machine:
+1. create the directory to put the file system
+```bash
+mkdir <directory name>
+```
+
+2. Mount the file system
+```bash
+'sshfs <server-name>:<remote/file/path> <path/to/directory>'
+```
+
+If you want to unmount the file system
+```bash
+umount <path/to/directory>
+```
 
 ## Plex media server
+A plex server was installed using the installation guide in the plex documentation
