@@ -2,12 +2,12 @@
 A simple server running Ubuntu server 20.04.3 on my old laptop. I will be documenting the steps i took to get the server up and running as well ass sharing the scripts - files etc i created along the way.
 
 ## Table of contents
-1. [Example](#example)
-2. [Setup](#Setup-and-initial-tweaking)
-3. [OpenSSH](#Setting-up-openssh)
-4. [Git](#Git)
-5. [File Server](#Network-file-server)
-6. [Plex](#Plex-media-server)
+1. [Setup](#Setup-and-initial-tweaking)
+2. [OpenSSH](#Setting-up-openssh)
+3. [Git](#Git)
+4. [Scripts](#Scripts)
+4. [File Server](#Network-file-server)
+5. [Plex Server](#Plex-media-server)
 
 ## Setup and initial tweaking
 Step one download and install ubuntu server on you machine. There are plenty of turtorials online about how to do this. Download the iso from the official ubuntu website: https://ubuntu.com/download/server 
