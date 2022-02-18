@@ -186,3 +186,10 @@ umount <path/to/directory>
 
 ## Plex media server
 A plex server was installed using the installation guide in the plex documentation
+
+## Endlessh
+While setting up this server i used my monitor script to monitor login-attempts. Almost instantly after enabeling port forwarding i noticed a flood of login attempts. Within the first day i had over 1000 attempts. The attackers seemed to be using a standard dictionary attack trying different normal usernames and password combintions. I quickly switched to only using ssh-keys puting an end to the attacks.
+
+Endlessh is a simple tiny way of getting back at the attackers, making their scrips slower by abusing the message sendt to users when loging in. When a client is trying to connect to my ssh-server on port 22 an infinite message is sendt causing the scripts to wait forever without crashing. My actual server is moved to a different port number.
+
+The project is available here https://github.com/skeeto/endlessh
