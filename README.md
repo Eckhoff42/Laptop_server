@@ -184,7 +184,7 @@ If you want to unmount the file system
 umount <path/to/directory>
 ```
 
-## Synching files between laptop and server with rsynch. 
+## Synching files between laptop and server with `rsynch`. 
 Rsynch is a tool preinstalled on most linux distributions that can be used to synch files between multiple places. The tool can traverse file systems recursively and also only updates changed/new files.
 
 ### usage
@@ -198,7 +198,7 @@ rsync -a -v -e "ssh -p 22" MyDirName/ username@192.168.0.20:/my/target/location
 ```
 
 ### periodic backup
-In order to automatically backup any changes to the server i created a small script on my laptop. The script runs the rsynch command above every day at 12:00. The script is added as a crontab job as follows.
+In order to automatically backup any changes to the server i created a small script on my laptop. The script runs the rsynch command above every day at 12:00. The script is added as a `crontab job` as follows.
 
 1. open the file
 ```bash
