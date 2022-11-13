@@ -1,6 +1,9 @@
 # Personal server
 A simple server running Ubuntu server 20.04.3 on my old laptop. I will be documenting the steps i took to get the server up and running as well ass sharing the scripts - files etc i created along the way.
 
+![image](https://user-images.githubusercontent.com/42439472/201532482-81abec51-13b3-4c59-877c-ecf8c02e64f0.png)
+
+
 ## Table of contents
 1. [Setup](#Setup-and-initial-tweaking)
 2. [OpenSSH](#Setting-up-openssh)
